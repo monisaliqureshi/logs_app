@@ -54,7 +54,7 @@ else:
             csv,
             "file.csv",
             "text/csv",
-            key='download-csv'
+            key='download-csv1'
             )
     except Exception as e:
         st.error("Your username or password is incorrect...")
