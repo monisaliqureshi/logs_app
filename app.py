@@ -1,7 +1,9 @@
 import streamlit as st
 from pymongo import MongoClient
 from pandas import json_normalize
-
+import socket
+hostname=socket.gethostname()
+IPAddr=socket.gethostbyname(hostname)
 
 st.set_page_config(page_title="Logs")
 
@@ -9,6 +11,7 @@ def convert_df(df):
    return df.to_csv(index=False).encode('utf-8')
 
 st.title("AI Camera Logs")
+st.text(IPAddr)
 uname = st.empty()
 passwd = st.empty()
 
