@@ -1,6 +1,6 @@
 import streamlit as st
 from pymongo import MongoClient
-from pandas.io.json import json_normalize
+from pandas import json_normalize
 
 
 st.set_page_config(page_title="Logs")
@@ -33,7 +33,6 @@ else:
         with col1:
             st.text("All Data")
             st.dataframe(df)
-            download_as_csv = st.button("Download as CSV")
             csv = convert_df(df)
             st.download_button(
             "Press to Download",
@@ -44,7 +43,16 @@ else:
             )
         with col2:
             st.text("Gaze Time")
-            st.dataframe(json_normalize(gaze_time).drop_duplicates())
+            gaze_df = json_normalize(gaze_time).drop_duplicates()
+            st.dataframe(gaze_df)
+            csv = convert_df(gaze_df)
+            st.download_button(
+            "Press to Download",
+            csv,
+            "file.csv",
+            "text/csv",
+            key='download-csv'
+            )
     except Exception as e:
         st.error("Your username or password is incorrect...")
         print(e)
